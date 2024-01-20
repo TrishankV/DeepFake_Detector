@@ -1,18 +1,21 @@
 # DeepFake_Detector
 
-## Building a deepfake image detection model which is capable of classifying image into two categories Ai-Genrated or Real image using TensorFlow
+## Building a deep fake image detection model that is capable of classifying images into two categories Ai-Generated or Real images using TensorFlow
 
 # Problem Definition
-* The model is used for detection of deepfake or Ai-generated images that 
-  are now widly used for spreading hate speech and fake news.
+* The model is used for the detection of deep fake or AI-generated images that 
+  are now widely used for spreading hate speech and fake news.
 
 # Data
-* We are using Kaggle data  uploaded on the drive and will also upload     zip file on github 
+* We are using Kaggle data  uploaded on the drive and will also upload    a zip file on GitHub 
 
 # Evaluation
 
-* Prediction Probalities should be more than 90% which is this projects goal to acheive
+* Prediction Probabilities should be more than 90% which is this project's goal to achieve
 
 # Features
 
-* Few key information abot features as the project is based on image classification which are unstructured, Thus there is no such distinctive feature but the data is divide into 3 parts . Testing,Training and Validation. and the model will be a binary classifier
+* A few key information about features as the project is based on unstructured image classification, Thus there is no such distinctive feature but the data is divided into 3 parts. Testing, Training, and Validation. the model will be a binary classifier
+
+``# for unzipping the zip file run this
+#!unzip '/content/drive/MyDrive/Deepfake/deepfake.zip' -d "/content/drive/MyDrive/Deepfake/"``
