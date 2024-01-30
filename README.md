@@ -7,7 +7,9 @@
   are now widely used for spreading hate speech and fake news.
 
 # Data
-* We are using Kaggle data  uploaded on the drive and will also upload    a zip file on GitHub 
+* We are using Kaggle data  uploaded on the drive and will also upload    a zip file on GitHub
+* For the Training dataset our project includes 10,000 images per class to increase the quality of the model
+
 
 # Evaluation
 
