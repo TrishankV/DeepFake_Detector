@@ -7,8 +7,11 @@
   are now widely used for spreading hate speech and fake news.
 
 # Data
-* We are using Kaggle data  uploaded on the drive and will also upload    a zip file on GitHub
-* For the Training dataset our project includes 37,900 Fake and 10,000 Real images which can create a bias so our project acknowledges these issues by reducing the number of fake images without affecting the accuracy largely
+*We are using Kaggle data  uploaded on the drive can be downloaded from the following URL
+https://www.kaggle.com/datasets/ericji150/nsf-reu-2023-sd-21
+[E. Ji, B. Dong, B. Samanthula, N. Zhou. "2D-FACT: Dual-Domain Fake Image Detection Against Textto-Image Generative Models". MIT Undergraduate Research Technology Conference (URTC 2023).]
+
+* For the Training dataset our project includes 10,000 Fake and 10,000 Real images which can create a bias so our project acknowledges these issues by reducing the number of fake images without affecting the accuracy largely
 
 
 # Evaluation
