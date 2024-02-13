@@ -23,7 +23,7 @@ https://www.kaggle.com/datasets/ericji150/nsf-reu-2023-sd-21
 * *Pytorch hub* = https://pytorch.org/hub/
 * *Object detection* = https://www.kaggle.com/models/google/mobilenet-v2/frameworks/tensorFlow2/variations/130-224-classification/versions/1?tfhub-redirect=true
 * *Papers with code* = https://paperswithcode.com/
-* *Tesla model* = https://www.youtube.com/watch?v=oBklltKXtDE&t=173s
+* *Tesla model uses RESNET-50 model* = https://www.youtube.com/watch?v=oBklltKXtDE&t=173s
 * *Tensorflow hub* = https://www.tensorflow.org/resources/models-datasets
 * *Model-Zoo* = https://www.modelzoo.co/  
 
