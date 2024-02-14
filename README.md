@@ -25,7 +25,8 @@ https://www.kaggle.com/datasets/ericji150/nsf-reu-2023-sd-21
 * *Papers with code* = https://paperswithcode.com/
 * *Tesla model uses RESNET-50 model* = https://www.youtube.com/watch?v=oBklltKXtDE&t=173s
 * *Tensorflow hub* = https://www.tensorflow.org/resources/models-datasets
-* *Model-Zoo* = https://www.modelzoo.co/  
+* *Model-Zoo* = https://www.modelzoo.co/
+* *Better model for Transfer Learning* https://www.kaggle.com/models/keras/efficientnetv2
 
 # Features
 
