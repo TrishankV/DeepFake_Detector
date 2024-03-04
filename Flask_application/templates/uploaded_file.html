@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Detect deepfake images using advanced algorithms." />
+    <meta name="author" content="Your Name" />
+    <title>DeepFake Detection</title>
+    <!-- Favicon and Bootstrap Icons-->
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='assets/favicon.ico') }}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS -->
+    <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .container {
+            text-align: center;
+        }
+
+        .page-section {
+            display: inline-block;
+            text-align: left;
+            max-width: 80%; /* Adjust as needed */
+            margin: auto;
+            margin-top: 50px; /* Adjust as needed */
+        }
+
+        .image {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: auto;
+            margin-bottom: 20px; /* Adjust as needed */
+        }
+        .Center {
+            text-align: center;
+        }
+        body{
+            background: #F7F6BB;
+        }
+    </style>
+</head>
+<body id="page-top">
+    <!-- Navigation-->
+    <div class="masthead">
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" style='color: blue;  background:  #114232 ;'>
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="#page-top">DeepFake Detection</a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto my-2 my-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('about') }}">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('services') }}">Services</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('contact') }}">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container">
+        <section class="page-section" id="upload-image">
+            <!-- <h1>Uploaded Image</h1> -->
+            <!-- <img id="uploadedImage" class="image" /> -->
+            <img id="uploadImage" src="{{ url_for('static', filename='uploads/' + filename) }}" class="image" />
+            <h2 class="Center">It Is {{ prediction }}</h2>
+        </section>
+    </div>
+
+    <script>
+       function uploadImage() {
+        var formData = new FormData();
+        var imageFile = document.getElementById('imageFile').files[0];
+        formData.append('imageFile', imageFile);
+        fetch('/upload-image', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('imageAnalysisResult').innerHTML = '<h3>Image Analysis Result</h3><p>' + data.result + '</p>';
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+
+
+    </script>
+</body>
+</html>

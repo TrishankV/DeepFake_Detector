@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Detect deepfake images using advanced algorithms." />
+    <meta name="author" content="Your Name" />
+    <title>DeepFake Detection</title>
+    <!-- Favicon and Bootstrap Icons-->
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='assets/favicon.ico') }}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS -->
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" />
+    <style>
+        body{
+            background: #F7F6BB;
+        }
+    </style>
+</head>
+<body id="page-top">
+    <!-- Navigation-->
+    <div class="masthead">
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" style='color: blue;  background: #114232 ;'>
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="#page-top">DeepFake Detection</a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto my-2 my-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('about') }}">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('services') }}">Services</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('contact') }}">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Masthead-->
+    <header class="masthead">
+        <div class="container px-4 px-lg-5 h-100">
+            <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
+                <div class="col-lg-8">
+                    <h1 class="text-white font-weight-bold">Detect Deepfake Images with Precision</h1>
+                    <hr class="divider" />
+                    <p class="text-white-75 mb-5">Upload images to our platform and let our advanced algorithms determine if they're authentic or deepfakes. Protect your integrity today!</p>
+                    <a class="btn btn-primary btn-xl" href="{{ url_for('about') }}">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- About-->
+
+    <!-- Call to action-->
+
+    <!-- Image Upload Section -->
+    <!-- <section class="page-section bg-light" id="image-upload">
+        <div class="container px-4 px-lg-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-xl-6 text-center">
+                    <h2 class="mt-0">Upload an Image for Analysis</h2>
+                    <hr class="divider" />
+                    <p class="text-muted mb-5">Upload an image to verify its authenticity using our cutting-edge detection technology.</p> -->
+
+                    <!------------------------------------------------------------------------------------------------------------------------------------------->
+                    <!-- <form id="imageUploadForm" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <input type="file" class="form-control-file" id="imageFile" name="imageFile" accept="image/*">
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary" onclick="uploadImage()">Upload Image</button>
+                        </div>
+                    </form> -->
+
+                   <!------------------------------------------------------------------------------------------------------------------------------------------->
+                    <!-- <h2>Upload an Image</h2>
+                    <form action="/upload" method="post" enctype="multipart/form-data">
+                        <input type="file" name="file">
+                        <input type="submit" value="Upload">
+                    </form>
+                    <div id="image-container">
+                        {% if image %}
+                            <img src="{{ image }}" alt="Uploaded Image" style="max-width: 400px;">
+                        {% endif %}
+                    </div>
+                    <div>
+                        {% if prediction %}
+                            <p>Predicted Label: {{ prediction }}</p>
+                        {% endif %}
+                    </div>
+                    <div id="imageAnalysisResult"></div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+    <!-- Contact-->
+
+    <!-- Footer-->
+    <footer class="bg-danger py-5">
+        <div class="container px-4 px-lg-5">
+            <div class="small text-center text-muted">Copyright &copy; 2024 - DeepFake Detection</div>
+        </div>
+    </footer>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- SimpleLightbox plugin JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
+    <!-- Image Upload script -->
+    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    <script>
+        function uploadImage() {
+            var formData = new FormData();
+            var imageFile = document.getElementById('imageFile').files[0];
+            formData.append('imageFile', imageFile);
+            fetch('/upload-image', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('imageAnalysisResult').innerHTML = '<h3>Image Analysis Result</h3><p>' + data.result + '</p>';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>
