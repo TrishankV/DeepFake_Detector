@@ -9,7 +9,7 @@ app = Flask(__name__)
 UPLOAD_FOLDER = 'static/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
-MODEL_PATH = 'downloads/DeepFake_Detector-main/my_model_1.h5'
+MODEL_PATH = r'my_model_1.h5'
 app.secret_key = "sex key"
 # Load the pre-trained model
 model = new_model = tf.keras.models.load_model(MODEL_PATH)
@@ -48,14 +48,14 @@ def upload_file():
         
         flash('Image successfully uploaded')
         prediction = process_image(file_path)
-        return redirect(url_for('uploaded_file', filename=uploaded_file.filename))
+        return render_template('uploaded_file.html', filename=filename,prediction=prediction)
     return render_template('index.html')
 
-@app.route('/uploads/<filename>')
-def uploaded_file(filename):
-    file_path = os.path.join(UPLOAD_FOLDER, filename)
-    prediction = process_image(file_path)
-    return render_template('uploaded_file.html', image=file_path, prediction=prediction)
+# @app.route('/uploads/<filename>')
+# def uploaded_file(filename):
+#     file_path = os.path.join(UPLOAD_FOLDER, filename)
+#     prediction = process_image(file_path)
+#     return render_template('uploaded_file.html', image=file_path, prediction=prediction)
 
     
 def process_image(file_path):
@@ -78,9 +78,9 @@ def process_image(file_path):
 
 # Categorize the prediction
     if predictions >= threshold:
-        prediction_class = 'Real_Image'
+        prediction_class = 'A Real Image'
     else:
-        prediction_class = 'Ai-generated Image'
+        prediction_class = 'An Ai-generated Image'
 
     prediction_label = f'{prediction_class}'
 
