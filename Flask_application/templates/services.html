@@ -17,6 +17,12 @@
         body{
             background: #F7F6BB;
         }
+        .options{
+            padding:10px !important;
+            background-color: #114232;
+            color: gold;
+            border: 2px solid black;
+        }
     </style>
 </head>
 <body id="page-top">
@@ -62,24 +68,47 @@
                 </form> -->
                 <h2>Upload an Image</h2>
                 <form action="/upload" method="post" enctype="multipart/form-data">
-                    <input type="file" name="file">
-                    <input type="submit" value="Upload">
+                    <input class="options" id="fileInput" type="file" name="file">
+                    <input class="options" type="submit" value="Upload">
                 </form>
                 <div id="image-container">
                     {% if image %}
                         <img src="{{ image }}" alt="Uploaded Image" style="max-width: 400px;">
                     {% endif %}
                 </div>
-                <div>
+                <!-- <div>
                     {% if prediction %}
                         <p>Predicted Label: {{ prediction }}</p>
                     {% endif %}
-                </div>
-                <div id="imageAnalysisResult"></div>
+                </div> -->
+                <div id="image-container"></div>
             </div>
         </div>
     </div>
 </section>
+<script>
+document.getElementById('fileInput').addEventListener('change', function (event) {
+            var file = event.target.files[0];
+            if (!file) return;
+
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var imageUrl = e.target.result;
+                displayImage(imageUrl);
+            };
+            reader.readAsDataURL(file);
+        });
+
+        function displayImage(imageUrl) {
+            var imageContainer = document.getElementById('image-container');
+            var imgElement = document.createElement('img');
+            imgElement.src = imageUrl;
+            imgElement.alt = 'Selected Image';
+            imgElement.style.maxWidth = '400px';
+            imageContainer.innerHTML = ''; // Clear previous image
+            imageContainer.appendChild(imgElement);
+        }
+</script>
 <footer class="bg-danger py-5">
     <div class="container px-4 px-lg-5">
         <div class="small text-center text-muted">Copyright &copy; 2024 - DeepFake Detection</div>
