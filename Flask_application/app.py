@@ -67,7 +67,14 @@ def upload_file():
         prediction = process_image(file_path)
         # Apply watermark
         wm_image_path = apply_watermark(file_path, prediction)
+        print(wm_image_path,filename)
         
+        # watermark image file alteration
+        # filename = wm_image_path.split("uploads")[1]
+        # filename = filename[1:]
+        # print(filename)
+        # shoud download on click 
+
         return render_template('uploaded_file.html', filename=filename, prediction=prediction, wm_image_path=wm_image_path)
     
     else:
@@ -122,12 +129,12 @@ def apply_watermark(input_image_path, watermark_text):
     
     # Define the size of the rectangle
     rectangle_width = w/4  # Adjust as needed
-    rectangle_height = 40  # Adjust as needed
+    rectangle_height = 45  # Adjust as needed
     
     # Draw the semi-transparent black container at the top left corner
     rectangle_x = text_x
     rectangle_y = text_y
-    draw.rectangle([rectangle_x, rectangle_y, rectangle_x + rectangle_width, rectangle_y + rectangle_height], fill=(0, 0, 0, 50))
+    draw.rectangle([rectangle_x, rectangle_y, rectangle_x + rectangle_width, rectangle_y + rectangle_height], fill=(0, 0, 0, 128))
 
     font = ImageFont.truetype("arial.ttf", 30)
     draw.text((10, 10), watermark_text, fill=(255, 255, 255, 128), font=font)
