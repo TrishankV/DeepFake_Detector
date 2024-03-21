@@ -41,6 +41,40 @@
         body{
             background: #F7F6BB;
         }
+        .container {
+    padding: 20px;
+}
+
+.page-section {
+    text-align: center;
+}
+
+.image {
+    max-width: 100%;
+    height: auto;
+    border: 2px solid #ccc; /* Add border */
+    border-radius: 8px; /* Rounded corners */
+    margin-bottom: 20px; /* Add spacing between image and text */
+}
+
+.center {
+    margin-bottom: 20px; /* Add spacing between image and text */
+}
+
+#downloadButton {
+    background-color: #007bff; /* Button color */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+
+#downloadButton:hover {
+    background-color: #0056b3; /* Change color on hover */
+}
+
     </style>
 </head>
 <body id="page-top">
@@ -64,14 +98,29 @@
 
     <div class="container">
         <section class="page-section" id="upload-image">
-            <!-- <h1>Uploaded Image</h1> -->
-            <!-- <img id="uploadedImage" class="image" /> -->
             <img id="uploadImage" src="{{ url_for('static', filename='uploads/' + filename) }}" class="image" />
-            <h2 class="Center">It Is {{ prediction }}</h2>
+            <h2 class="center">It Is {{ prediction }}</h2>
+
+
+    <button id="downloadButton">Download labeled image</button>
+        <div id="dropdownMenu" class="dropdown-content">
+            <select id="fileType">
+                <option value="jpg">JPG</option>
+                <option value="png">PNG</option>
+            </select>
+            <select id="aspectRatio">
+                <option value="original">Original</option>
+                <option value="square">Square (1:1)</option>
+                <!-- Add more aspect ratios as needed -->
+            </select>
+            <button id="confirmDownload">Confirm</button>
+        </div>
+        <!-- Download Link
+        <a id="downloadLink" href="{{ url_for('download_file', filename=filename) }}" download>Download Watermarked Image</a> -->
         </section>
     </div>
 
-    <script>
+<script>
        function uploadImage() {
         var formData = new FormData();
         var imageFile = document.getElementById('imageFile').files[0];
@@ -88,8 +137,82 @@
             console.error('Error:', error);
         });
     }
+    const downloadButton = document.getElementById('downloadButton');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    dropdownMenu.style.display = 'none';
+    // When the download button is clicked, show the dropdown menu
+    downloadButton.addEventListener('click', function() {
+    dropdownMenu.style.display = 'block';
+    });
 
+// When the confirm download button is clicked, initiate the download
+    const confirmDownloadButton = document.getElementById('confirmDownload');
 
+//     confirmDownloadButton.addEventListener('click', function() {
+//     // Get the selected file type and aspect ratio
+//     const selectedFileType = document.getElementById('fileType').value;
+//     const selectedAspectRatio = document.getElementById('aspectRatio').value;
+
+//     // Generate the download link
+//     const downloadLink = document.createElement('a');
+//     // downloadLink.href = '{{ url_for("download_file", filename=wm_image_path) }}' + '?file_type=' + selectedFileType + '&aspect_ratio=' + selectedAspectRatio;
+//     downloadLink.href = '{{ url_for("download_file", filename=wm_image_path) }}' ;
+//     // Trigger the download
+//     downloadLink.click();
+
+//     // Hide the dropdown menu after download
+//     dropdownMenu.style.display = 'none';
+// });
+
+confirmDownloadButton.addEventListener('click', function() {
+    // Get the selected file type and aspect ratio
+    const selectedFileType = document.getElementById('fileType').value;
+    const selectedAspectRatio = document.getElementById('aspectRatio').value;
+
+    const wmImagePath = '{{ wm_image_path }}';
+    const filename = wmImagePath;
+    console.log('Filename:', filename);
+    // Create a FormData object to send additional parameters to the server
+    const formData = new FormData();
+    formData.append('file_type', selectedFileType);
+    formData.append('aspect_ratio', selectedAspectRatio);
+
+    // Send a POST request to the server to handle the download
+    // fetch('{{ url_for("download_file") }}?filename=' + encodeURIComponent('{{ wm_image_path }}'), {
+    //     method: 'POST',
+    //     body: formData,
+    // })
+    fetch('{{ url_for("download_file") }}?filename=' + filename, {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => {
+        // Check if the response is successful
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        // Return the response body as a blob
+        return response.blob();
+    })
+    .then(blob => {
+        // Create a temporary anchor element
+        const link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = 'watermarked_image';  // Set the filename for download
+
+        // Simulate a click event to trigger the download
+        link.click();
+
+        // Clean up
+        window.URL.revokeObjectURL(link.href);
+
+        // Hide the dropdown menu after download
+        dropdownMenu.style.display = 'none';
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+});
 
     </script>
 </body>
