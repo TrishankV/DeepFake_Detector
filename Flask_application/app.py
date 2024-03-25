@@ -128,7 +128,7 @@ def process_image(file_path):
     # Open and preprocess the image
     image = tf.io.read_file(file_path)
     # Example: Resize the image to fit model input size
-    image = image.convert("RGB")
+    # image = image.convert("RGB")
     image = tf.image.decode_jpeg(image,channels = 3)
     image = tf.image.convert_image_dtype(image,tf.float32)#normalize
     image = tf.image.resize(image,size=[224,224])
